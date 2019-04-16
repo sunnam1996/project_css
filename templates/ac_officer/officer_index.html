@@ -1,0 +1,44 @@
+{% include 'cssfile.html' %}
+{% include 'menu.html' %}
+            {% load staticfiles %}
+  <!--/ Intro Skew Star /-->
+  <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/img5.jpg' %})">
+    <div class="overlay-itro"></div>
+    <div class="intro-content display-table">
+      <div class="table-cell">
+        <div class="container">
+            <table align="right" style="font-family: 'Times New Roman'">
+                <tr>
+                    <th>
+                        <form action="{% url 'login_check' %}" method="post">
+                            {% csrf_token %}
+                            <table height="100" width="300">
+                                <h3><font color="orange"><p>Officer Login Page</p></font></h3>
+
+                                <tr><th></th></tr>
+
+                                <tr><th><input type="text" name="username" placeholder="Username" required autofocus></th></tr>
+
+                                <tr><th></th></tr>
+
+                                <tr><th><input type="password" name="password" placeholder="Password" required></th></tr>
+                                <tr><th><input type="hidden" name="utype" value="officer"></th></tr>
+
+                                <tr><th><input type="submit" value="Login" ></th></tr>
+
+                            </table>
+
+                            {% for message in messages %}
+                                <font color="red" size="5">{{ message }}</font>
+                            {% endfor %}
+
+                        </form>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+

@@ -1,0 +1,27 @@
+{% if request.session.admin %}
+    {% load staticfiles%}
+    {% include 'cssfile.html' %}
+     {% include 'ac_admin/admin_menu.html' %}
+      <!--/ Intro Skew Star /-->
+      <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/post-1.jpg' %})">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table" style="font-family: 'Times New Roman'">
+          <div class="table-cell">
+            <div class="container">
+                <table>
+                    <tr>
+                        <th>
+                            <h3><p style="color: #869791">Complaint's Status</p></h3>
+                        </th>
+                    </tr>
+                    <tr><th><a href="{% url 'admin_pending_complaints' %}" style="color: olivedrab">Pending Complaints</a></th></tr>
+                    <tr><th><a href="{% url 'admin_assigned_complaints' %}" style="color: olivedrab">Assigned Complaints</a></th></tr>
+                    <tr><th><a href="{% url 'admin_closed_complaints' %}" style="color: olivedrab">Closed Complaints</a></th></tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+{% else %}
+    {% include 'ac_admin/admin_index.html' %}
+{% endif %}

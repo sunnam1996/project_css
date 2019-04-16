@@ -1,0 +1,78 @@
+{% if request.session.admin %}
+    {% include 'cssfile.html' %}
+    {% include 'ac_admin/admin_menu.html' %}
+    {% load staticfiles %}
+     <!--/ Intro Skew Star /-->
+      <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/post-1.jpg' %})">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table">
+          <div class="table-cell">
+            <div class="container">
+                <table align="center" border="0" style="font-family: 'Times New Roman'">
+                    <tr>
+                        <th>
+                            {% if dept_data %}
+                                <form action="{% url 'save_officer' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <table border="0">
+                                        <tr><th><h3 style="color: #efa2a9"><p>Officer Registration</p></h3></th></tr>
+                                    <tr><th><input type="number" name="idno" placeholder="Idno" required></th></tr>
+                                    <tr><th><input type="text" name="name" placeholder="Name" required></th></tr>
+                                    <tr><th>
+                                        Department:<select name="dept">
+                                        {% for x in dept_data %}
+                                            <option>{{ x }}</option>
+                                        {% endfor %}
+                                    </select></th></tr>
+                                    <tr><th><input type="number" name="contact" placeholder="Contact_no" required></th></tr>
+                                    <tr><th><input type="file" name="image"></th></tr>
+                                    <tr><th><input type="text" name="username" placeholder="Username" required></th></tr>
+                                    <tr><th><input type="password" name="password" placeholder="Password" required></th></tr>
+                                    <tr><th><input type="submit" value="Register"></th></tr>
+                                    </table>
+                                </form>
+                                {% if msg %}
+                                    <font color="green" size="5">{{ msg }}</font>
+                                {% endif %}
+                            {% else %}
+                                <table align="center">
+                                <tr>
+                                    <th><h4><font color="red">Here,No Department. 1st Create Department Name </font></h4></th>
+                                </tr>
+                                </table>
+                            {% endif %}
+                        </th>
+                        <th>
+                            {% if officer_data %}
+                                <h3 style="color: peachpuff"><p>Officer Details</p></h3>
+                                <table border="2">
+                                <tr style="color: #9fcdff">
+                                    <th>Idno</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Contact_No</th>
+                                    <th>Image</th>
+                                </tr>
+                                {% for y in officer_data %}
+                                    <tr>
+                                    <td>{{ y.idno }}</td>
+                                    <td>{{ y.name }}</td>
+                                    <td>{{ y.department_id }}</td>
+                                    <td>{{ y.contact }}</td>
+                                    <td>
+                                        <img src="{{ y.image.url }}" width="80" height="80">
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </table>
+                            {% endif %}
+                        </th>
+                    </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+{% else %}
+    {% include 'ac_admin/admin_index.html' %}
+{% endif %}

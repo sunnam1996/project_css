@@ -1,0 +1,25 @@
+{% if request.session.officer %}
+    {% include 'cssfile.html' %}
+    {% include 'ac_officer/officer_menu.html' %}
+    {% load staticfiles %}
+    <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/post-3.jpg' %})">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table">
+          <div class="table-cell">
+            <div class="container">
+
+                {% load staticfiles %}
+    <table align="right">
+        <tr>
+            <th>
+                <p><font color="#90ee90" face="timesnewroman">Hello,Officer</font></p>
+            </th>
+        </tr>
+    </table>
+            </div>
+          </div>
+        </div>
+      </div>
+{% else %}
+    {% include 'ac_officer/officer_index.html' %}
+{% endif %}

@@ -1,0 +1,32 @@
+    {% include 'cssfile.html' %}
+    {% load staticfiles %}
+    {% include 'menu.html' %}
+    <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/img6.jpg' %});font-family: 'Times New Roman'">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table">
+          <div class="table-cell">
+            <div class="container">
+                <table align="center">
+                    <tr>
+                        <th>
+                            <form action="{% url 'citizen_registration_save' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <table align="center" border="0">
+                                <tr><th><h3><p style="color: #b1dfbb">Citizen Registration</p></h3></th></tr>
+                                <tr><th><input type="text" name="name" placeholder="Name" required></th></tr>
+                                <tr><th><input type="number" name="contact" placeholder="Contact_No" required></th></tr>
+                                <tr><th><input type="text" name="city" placeholder="City" required></th></tr>
+                                <tr><th><textarea name="address" placeholder="Address" required></textarea></th></tr>
+                                <tr><th><input type="file" name="image"></th></tr>
+                                <tr><th><input type="text" name="username" placeholder="Username"required></th></tr>
+                                <tr><th><input type="password" name="password" placeholder="Password" required></th></tr>
+                                <tr><th><button type="submit">Register</button></th></tr>
+                            </table>
+                            </form>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+    </div>

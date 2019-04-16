@@ -1,0 +1,38 @@
+{% if request.session.ctid %}
+    {% load staticfiles%}
+    {% include 'cssfile.html' %}
+     {% include 'ac_citizen/citizen_menu.html' %}
+      <!--/ Intro Skew Star /-->
+      <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/intro-bg.jpg' %})">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table" style="font-family: 'Times New Roman'">
+          <div class="table-cell">
+            <div class="container">
+                <form action="{% url 'citizen_complaint_save' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <h3><p style="color: #b1dfbb">Citizen Complaint Registration</p></h3>
+                    <table align="center" border="2">
+                    <tr><th><input type="number" name="cid" placeholder="Complaint_id" required></th></tr>
+                    <tr><th><input type="number" name="ctid" value="{{ request.session.ctid }}" readonly required></th></tr>
+                    <tr><th>Department:
+                        <select name="dept">
+                            {% for x in object_list %}
+                                <option>{{ x.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </th></tr>
+                    <tr><th><textarea name="message" placeholder="Message" required></textarea></th></tr>
+                    <tr><th><input type="file" name="image"></th></tr>
+                    <tr><th><button type="submit">Register</button></th></tr>
+                </table>
+                </form>
+            {% if msg %}
+    <font color="red" size="4"><strong>{{ msg }}</strong></font>
+    {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+{% else %}
+    {% include 'ac_citizen/citizen_index.html' %}
+{% endif %}

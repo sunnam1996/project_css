@@ -1,0 +1,61 @@
+{% load staticfiles%}
+{% include 'cssfile.html' %}
+ {% include 'menu.html' %}
+  <!--/ Intro Skew Star /-->
+  <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/img6.jpg' %})">
+    <div class="overlay-itro"></div>
+    <div class="intro-content display-table">
+      <div class="table-cell">
+        <div class="container">
+<table align="right" style="font-family: 'Times New Roman'">
+    <tr>
+        <th>
+            <form action="{% url 'login_check' %}" method="post">
+                {% csrf_token %}
+            <table height="100" width="300">
+                <h3><font color="#dda0dd"><p>Citizen Login Page</p></font></h3>
+                    <tr><th></th></tr>
+                <tr><th><input type="text" name="username" placeholder="Username" required autofocus></th></tr>
+                    <tr><th></th></tr>
+                <tr><th><input type="password" name="password" placeholder="Password" required></th></tr>
+                <tr><th><input type="hidden" name="utype" value="citizen"></th></tr>
+                <tr><th><input type="submit" value="Login" ></th></tr>
+            </table>
+            {% if msg %}
+                <font color="yellow">{{ msg }}</font>
+            {% endif %}
+
+                {% for message in messages %}
+                <font color="red" size="5">{{ message }}</font>
+            {% endfor %}
+
+            </form>
+        </th>
+    </tr>
+<tr>
+    <th>
+        <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-bottom" id="mainNav">
+    <div class="container">
+        <div class="navbar-collapse collapse justify-content-xl-end" id="navbarDefault">
+        <ul class="navbar-nav" style="font-family: 'Times New Roman'">
+          <li class="nav-item">
+        <a class="nav-link js-scroll" href="{% url 'citizen_register' %}">Citizen Register</a>
+          </li>
+            <li class="nav-item">
+        <a class="nav-link js-scroll" href="{% url 'citizen_otp_check' %}">Citizen Otp Verification</a>
+          </li>
+        </ul>
+        </div>
+    </div>
+        </nav>
+    </th>
+</tr>
+</table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

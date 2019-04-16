@@ -1,0 +1,89 @@
+{% if request.session.admin %}
+    {% include 'cssfile.html' %}
+    {% load staticfiles %}
+    {% include 'ac_admin/admin_menu.html' %}
+     <!--/ Intro Skew Star /-->
+      <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/post-1.jpg' %})">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table">
+          <div class="table-cell">
+            <div class="container">
+
+    <table align="center" style="font-family: 'Times New Roman'">
+        <tr>
+            <th>
+            {% if dname %}
+                <form action="{% url 'update_dept' %}" method="post">
+                    {% csrf_token %}
+                <table align="center" border="2">
+                <tr>
+                    <th colspan="6" style="color: #9fcdff;font-size: 20px">Update Department Details</th>
+                </tr>
+                    <tr style="color: violet">
+                        <th>
+                            Enter Dept.Name:<input type="text" name="new_name" value="{{ dname }}">
+                            <input type="hidden" name="old_name" value="{{ dname }}">
+                        </th>
+                        <th><button type="submit">Save</button></th>
+                    </tr>
+                    {% if msg %}
+                        <font color="red">{{ msg }}</font>
+                    {% endif %}
+                </table>
+                </form>
+            {% else %}
+                <form action="{% url 'save_department' %}" method="post">
+                    {% csrf_token %}
+                <table align="center" border="2">
+                <tr>
+                    <th colspan="5" style="color: #efa2a9;font-size: 20px">Department Details</th>
+                </tr>
+                    <tr style="color: violet">
+                        <th>
+                            Enter Dept.Name:<input type="text" name="dept_name">
+                        </th>
+                        <th><button type="submit">Save</button></th>
+                    </tr>
+
+                </table>
+                </form>
+                {% if msg %}
+                        <font color="red">{{ msg }}</font>
+                    {% endif %}
+            {% endif %}
+            <br>
+            <br>
+                <table align="center" border="2">
+                    <tr bgcolor="#6b8e23">
+                        <th width="200">Dept.Name</th>
+                        <th width="200">Update</th>
+                        <th width="200">Delete</th>
+                    </tr>
+                {% if object_list %}
+                    {% for x in object_list %}
+                        <tr>
+                        <th width="200">{{ x.name }}</th>
+                        <th width="200">
+                            <a href="{% url 'up_dept' %}?name={{ x.name }}" style="text-decoration: none; color:brown">update</a>
+                        </th>
+                        <th width="200">
+                            <a href="{% url 'del_dept' %}?name={{ x.name }}" style="text-decoration: none; color: red">delete</a>
+                        </th>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <th colspan="5"><font color="red">Sorry,Here Department is not Avialable,Please ADD one</font></th>
+                    </tr>
+                {% endif %}
+                </table>
+            </th>
+        </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+{% else %}
+    {% include 'ac_admin/admin_index.html' %}
+{% endif %}

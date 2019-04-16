@@ -1,0 +1,45 @@
+{% if request.session.officer %}
+    {% load staticfiles%}
+    {% include 'cssfile.html' %}
+     {% include 'ac_officer/officer_menu.html' %}
+      <!--/ Intro Skew Star /-->
+      <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/post-3.jpg' %})">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table" style="font-family: 'Times New Roman'">
+          <div class="table-cell">
+            <div class="container">
+                    {% for x in F_data %}
+                        {% for y in C_data %}
+                            {% if y.department_id == request.session.dept %}
+                    <table bgcolor="#d2691e" align="center" border="2">
+                    <tr bgcolor="#7fff00">
+                        <td width="50">Fid</td>
+                        <td width="50">Cid</td>
+                        <td width="50">Ct_id</td>
+                        <td width="50">Department</td>
+                        <td width="50">Message</td>
+                        <td width="50">Image</td>
+                    </tr>
+                            <tr>
+                            <th>{{ x.fid }}</th>
+                            <th>{{ x.cid_id }}</th>
+                            <th>{{ x.ct_id_id }}</th>
+                            <th>{{ y.department_id }}</th>
+                            <th>{{ x.message }}</th>
+                            <th>
+                                <img src="{{ x.image.url }}" width="70" height="70">
+                            </th>
+                            </tr>
+                    </table>
+                            {% else %}
+                                <h3 style="color: #e4606d">No Feedbacks in <font face="Algerian" color="#f5deb3">{{ request.session.dept }}</font> Department</h3>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+{% else %}
+    {% include 'ac_officer/officer_index.html' %}
+{% endif %}

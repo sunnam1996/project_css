@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load staticfiles%}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <title>Active City</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+{#  <!-- Main Stylesheet File -->#}
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+{% include 'menu.html' %}
+
+  <!--/ Intro Skew Star /-->
+  <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/img4.jpg' %})">
+    <div class="overlay-itro"></div>
+    <div class="intro-content display-table" style="font-family: 'Times New Roman'">
+      <div class="table-cell">
+        <div class="container">
+          <p class="display-6 color-d">Hello, world!
+          <h1 class="intro-title mb-4" class="overlay-itro" id="home" class="intro route bg-transparent">Active City</h1>
+          <p class="intro-subtitle"><span class="text-slider-items">CEO DevFolio,Web Developer,Web Designer,Frontend Developer,Graphic Designer</span><strong class="text-slider"></strong></p>
+         <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="{% url 'about' %}" role="button">Learn More</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

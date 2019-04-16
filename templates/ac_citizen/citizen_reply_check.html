@@ -1,0 +1,39 @@
+{% if request.session.ctid %}
+{% load staticfiles%}
+{% include 'cssfile.html' %}
+ {% include 'ac_citizen/citizen_menu.html' %}
+  <!--/ Intro Skew Star /-->
+  <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/intro-bg.jpg' %})">
+    <div class="overlay-itro"></div>
+    <div class="intro-content display-table" style="font-family: 'Times New Roman'">
+      <div class="table-cell">
+        <div class="container">
+            {% if object_list %}
+                <table align="center" bgcolor="#dcdcdc">
+                <tr bgcolor="#f5deb3" style="color: #4e4e4e">
+                    <td width="50">Re_id</td>
+                    <td width="50">Fid</td>
+                    <td width="50">Cid</td>
+                    <td width="50">Ct_Id</td>
+                    <td width="50">Message</td>
+                </tr>
+                {% for x in object_list %}
+                    <tr style="color: black">
+                    <th>{{ x.re_no }}</th>
+                    <th>{{ x.fid_id }}</th>
+                    <th>{{ x.cid_id }}</th>
+                    <th>{{ x.ct_id_id }}</th>
+                    <th>{{ x.message }}</th>
+                    </tr>
+                {% endfor %}
+                </table>
+                {% else %}
+                <h3 style="color: #e4606d;font-family: Algerian"><p>No,Reply's to this Feedback</p></h3>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+    {% include 'ac_citizen/citizen_index.html' %}
+{% endif %}

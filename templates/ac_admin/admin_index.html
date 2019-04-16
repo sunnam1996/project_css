@@ -1,0 +1,43 @@
+{% include 'cssfile.html' %}
+{% load staticfiles%}
+{% include 'menu.html' %}
+
+  <!--/ Intro Skew Star /-->
+  <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/img8.jpg' %})">
+    <div class="overlay-itro"></div>
+    <div class="intro-content display-table">
+      <div class="table-cell">
+        <div class="container">
+
+            {% load staticfiles %}
+<table align="right" style="font-family: 'Times New Roman'">
+    <tr>
+        <td align="left">
+            <p style="font-family: 'Times New Roman';font-size: 20px;color: #adb5bd">
+                <strong><font color="#87ceeb" size="5">Active City</font></strong> is a non-profit organization dedicated to ensuring that young people in Hartford have access to organized and affordable youth athletic programs. We support organizations and programs that serve youth through athletic programing throughout Hartford. Working with community stakeholders, we will transform Hartford into America’s most physically active city for children. These programs will grow and develop their spirit, mind, and body, while fostering relationships between the city’s youth and positive members of our community.
+            </p>
+        </td>
+        <th>
+            <form action="{% url 'login_check' %}" method="post">
+                {% csrf_token %}
+                <table height="100" width="300">
+                    <h3><p style="color: #24b67e">Admin Login Page</p></h3>
+                    <tr><th></th></tr>
+                    <tr><th><input type="text" name="username" placeholder="Username" required autofocus></th></tr>
+                    <tr><th></th></tr>
+                    <tr><th><input type="password" name="password" placeholder="Password" required></th></tr>
+                    <tr><th><input type="hidden" name="utype" value="admin"></th></tr>
+                    <tr><th><input type="submit" value="Login" ></th></tr>
+                </table>
+            </form>
+        </th>
+    </tr>
+</table>
+            {% for message in messages %}
+                <font color="red" size="5">{{ message }}</font>
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,77 @@
+{% if request.session.ctid %}
+{% load staticfiles%}
+{% include 'cssfile.html' %}
+ {% include 'ac_citizen/citizen_menu.html' %}
+  <!--/ Intro Skew Star /-->
+  <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/intro-bg.jpg' %})">
+    <div class="overlay-itro"></div>
+    <div class="intro-content display-table" style="font-family: 'Times New Roman'">
+      <div class="table-cell">
+        <div class="container">
+{#        <table >#}
+{#            <tr>#}
+{#                <th>#}
+        <form action="{% url 'citizen_feedback_saved' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3 align="left" style="color: #ffc107"><p>Citizen Complaint Feedback</p></h3>
+            <table align="left" border="2" bgcolor="#9acd32" style="color: #0b2e13">
+                <tr>
+                    <td align="left">Complaint_Id:
+                        <select name="cid">
+                            {% for x in object_list %}
+                                <option>{{ x.cid }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            <tr>
+                <td>Citizen_ID:<input type="number" name="ctid" value="{{ request.session.ctid }}" readonly></td>
+            </tr>
+            <tr><td>Message:<textarea name="message"></textarea></td></tr>
+            <tr><td><input type="file" name="image"></td></tr>
+            <tr><th><button type="submit">Submit</button></th></tr>
+            </table>
+        {% for message in messages %}
+                <font color="#6b8e23" size="5">{{ message }}</font>
+            {% endfor %}
+        </form>
+{#                </th>#}
+{#                <th>#}
+                    {% if feeddata %}
+                        <h3 align="right" style="color: #ffc107"><p>Complaint Feedback Details</p></h3>
+                        <table align="right" style="color: black">
+                            <tr bgcolor="#5f9ea0">
+                                <th>Fid</th>
+                                <th>Cid</th>
+                                <th>Ct_Id</th>
+                                <th>Message</th>
+                                <th>Image</th>
+                                <th>Reply</th>
+                            </tr>
+                        {% for x in feeddata %}
+                            <tr bgcolor="#dda0dd">
+                            <th>{{ x.fid }}</th>
+                            <th>{{ x.cid_id }}</th>
+                            <th>{{ x.ct_id_id }}</th>
+                            <th>{{ x.message }}</th>
+                            <th>
+                                <img src="{{ x.image.url }}" width="70" height="50">
+                            </th>
+                            <th>
+                                <a class="badge badge-success" href="{% url 'reply_check' %}?fid={{ x.fid }}&cid={{ x.cid_id }}&ctid={{ x.ct_id_id }}">Check</a>
+                            </th>
+                            </tr>
+                        {% endfor %}
+
+                        </table>
+                    {% endif %}
+{#                </th>#}
+{#            </tr>#}
+{#        </table>#}
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+    {% include 'ac_citizen/citizen_index.html' %}
+{% endif %}

@@ -1,0 +1,75 @@
+{% if request.session.ctid %}
+{% load staticfiles%}
+{% include 'cssfile.html' %}
+ {% include 'ac_citizen/citizen_menu.html' %}
+  <!--/ Intro Skew Star /-->
+  <div id="home" class="intro route bg-image" style="background-image: url({% static 'img/intro-bg.jpg' %})">
+    <div class="overlay-itro"></div>
+    <div class="intro-content display-table" style="font-family: 'Times New Roman'">
+      <div class="table-cell">
+        <div class="container">
+        <table>
+            <tr>
+                <th>
+                    <table>
+                <tr>
+                    <th>
+                        <h3><p style="color: #869791">Complaint's Status</p></h3>
+                    </th>
+                </tr>
+                <tr><th><a href="{% url 'citizen_pending_complaints' %}" style="color: olivedrab">Pending Complaints</a></th></tr>
+                <tr><th><a href="{% url 'citizen_assigned_complaints' %}" style="color: olivedrab">Assigned Complaints</a></th></tr>
+                <tr><th><a href="{% url 'citizen_closed_complaints' %}" style="color: olivedrab">Closed Complaints</a></th></tr>
+            </table>
+                </th>
+            <table></table>
+            <table></table>
+            <table></table>
+            <table></table>
+            <table></table>
+                <th>
+            {% if object_list %}
+                <center><h4><font color="#ff1493" size="5"><u><i>Closed Complaints</i></u></font></h4></center>
+                <table align="center" bgcolor="#2e8b57">
+                    <tr bgcolor="#d2691e">
+                        <th>Cid</th>
+                        <th>Ct_id</th>
+                        <th>Department</th>
+                        <th>Message</th>
+                        <th>Image</th>
+                        <th>Register_Date</th>
+                        <th>Closed_Date</th>
+                    </tr>
+                {% for x in object_list %}
+                    {% if x.ct_id_id == request.session.ctid %}
+                    <tr>
+                        <th>{{ x.cid }}</th>
+                        <th>{{ x.ct_id_id }}</th>
+                        <th>{{ x.department_id }}</th>
+                        <th>{{ x.message }}</th>
+                        <th>
+                            <img src="{{ x.image.url }}" width="150" height="50">
+                        </th>
+                        <th>{{ x.register_date }}</th>
+                        <th>{{ x.close_date }}</th>
+                    </tr>
+                    {% else %}
+                        <tr><th style="color: red" colspan="10">No, complaints is available</th></tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            {% else %}
+                <table align="center">
+                    <tr><th style="color: red">Closed complaints is not available</th></tr>
+                </table>
+            {% endif %}
+                </th>
+            </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+    {% include 'ac_citizen/citizen_index.html' %}
+{% endif%}
